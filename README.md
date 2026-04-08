@@ -1,149 +1,92 @@
 # RouteIQ - Data Science Project
 
 ## Project Overview
-This project is part of the Data Science sprint and will involve developing intelligent routing solutions using data science and machine learning techniques.
+This repository is used for Data Science sprint work. The current milestone validates that the local development environment is working consistently before project coding begins.
 
-## Environment Setup
+## Environment Verification Status
 
-### System Information
+### Verified in Terminal (Current Session)
 - **Operating System**: Windows 11
-- **Processor**: [Your processor info]
-- **RAM**: [Your RAM info]
-- **Architecture**: 64-bit
+- **Python command**: Working
+- **Python version output**: `Python 3.14.3`
+- **Conda command**: Not currently recognized in PowerShell
+- **Jupyter command**: Not currently recognized in PowerShell
 
-### Python Installation
-- **Python Version**: 3.13.7
-- **Python Location**: C:\Python313\python.exe
-- **Installation Status**: Completed and Verified
-- **Verification Commands**:
-  ```bash
-  python --version
-  # Output: Python 3.13.7
-  
-  python -c "import sys; print('Python executable:', sys.executable)"
-  # Output: Python executable: C:\Python313\python.exe
-  
-  python -c "import math, os; print('Basic functionality: OK')"
-  # Output: Basic functionality: OK
-  ```
-
-### Anaconda Installation
-- **Anaconda Version**: 2024.10-1
-- **Installation Date**: April 8, 2026
-- **Installation Location**: C:\Users\Madhav Garg\anaconda3
-- **Conda Version**: 24.9.2
-
-#### Installation Steps Followed:
-1. [x] Downloaded Anaconda3-2024.10-1-Windows-x86_64.exe
-2. [x] Ran installer as Administrator
-3. [x] Selected "Just Me" installation type
-4. [x] Chose installation location: C:\Users\Madhav Garg\anaconda3
-5. [x] Added Anaconda to PATH environment variable
-6. [x] Registered Anaconda as default Python
-7. [x] Completed installation successfully
-
-#### Verification Commands:
-```bash
-# Conda version check
-conda --version
-# Output: conda 24.9.2
-
-# Python version in Anaconda
+### Evidence Log
+```powershell
 python --version
-# Output: Python 3.12.7
+# Output: Python 3.14.3
 
-# Environment information
+conda --version
+# Output: conda : The term 'conda' is not recognized ...
+
+jupyter --version
+# Output: jupyter : The term 'jupyter' is not recognized ...
+```
+
+## What Must Be Verified For Milestone Completion
+The final PR must include successful proof for all of the following:
+1. `python --version`
+2. `conda --version`
+3. Conda environment activation (`conda activate <env_name>`)
+4. Jupyter launch (`jupyter notebook` or `jupyter lab`)
+5. A Python cell execution inside Jupyter
+
+## Commands To Finish Verification
+Run these in **Anaconda Prompt** first (recommended), then in PowerShell after Conda initialization.
+
+```powershell
+conda --version
 conda info --envs
-# Output: 
-# base                  *  C:\Users\Madhav Garg\anaconda3
-# ds_sprint              C:\Users\Madhav Garg\anaconda3\envs\ds_sprint
-
-# Package list
-conda list
-# Output: [List of 200+ packages including numpy, pandas, matplotlib, seaborn, scikit-learn, jupyter]
-```
-
-### Data Science Environment
-- **Environment Name**: ds_sprint (created)
-- **Python Version**: 3.11 (installed)
-- **Key Packages**: numpy, pandas, matplotlib, seaborn, scikit-learn, jupyter (installed)
-
-#### Environment Setup Commands:
-```bash
-# Create environment
 conda create -n ds_sprint python=3.11 -y
-
-# Activate environment
 conda activate ds_sprint
-
-# Install packages
-conda install numpy pandas matplotlib seaborn scikit-learn jupyter -y
-
-# Verify packages
-python -c "import numpy as np; import pandas as pd; print('DS packages OK')"
-# Output: DS packages OK
+python --version
+python -c "import sys; print(sys.executable)"
+jupyter notebook
 ```
 
-## Project Structure
-```
-RouteIQ/
-|-- README.md                 # This file
-|-- SETUP_INSTRUCTIONS.md    # Detailed setup instructions
-|-- notebooks/               # Jupyter notebooks for analysis
-|-- src/                      # Source code
-|-- data/                     # Data files
-|-- models/                   # Trained models
-|-- tests/                    # Unit tests
+If Jupyter is missing in the environment:
+```powershell
+conda activate ds_sprint
+conda install jupyter -y
+jupyter notebook
 ```
 
-## Installation Verification Checklist
+## PowerShell Fix (If `conda` Is Not Found)
+Initialize Conda for PowerShell:
 
-### Python Setup
-- [x] Python 3.13.7 installed
-- [x] Python accessible from command line
-- [x] Basic Python functionality verified
-- [x] Math and OS modules working
+```powershell
+conda init powershell
+```
 
-### Anaconda Setup
-- [x] Anaconda downloaded
-- [x] Anaconda installed
-- [x] Conda accessible from command line
-- [x] Conda environments working
-- [x] Jupyter Notebook functional
-- [x] Data science packages installed
+Then close and reopen PowerShell and re-run:
 
-### Environment Validation
-- [x] Can switch between Python installations
-- [x] Can create and activate conda environments
-- [x] Can run Python scripts in different environments
-- [x] Can launch Jupyter Notebook
-- [x] Can import basic data science libraries
+```powershell
+conda --version
+jupyter --version
+```
 
-## Video Walkthrough
-A 2-minute screen recording demonstrating:
-1. Python version check in terminal
-2. Conda version check in terminal
-3. Environment activation
-4. Basic package imports
-5. Brief overview of this README section
+## Video Walkthrough Checklist (~2 Minutes)
+- Show `python --version`
+- Show `conda --version`
+- Activate the Conda environment
+- Launch Jupyter Notebook or JupyterLab
+- Run one Python cell successfully
+- Open your PR and point to the verification evidence
+- Verbally explain the scenario: terminal Python works but Jupyter uses another interpreter
 
-## Troubleshooting Notes
-- If conda command not found: Restart computer or manually add to PATH
-- If Python conflicts: Use conda environments for isolation
-- If package installation fails: Check internet connection and try `conda update conda`
-
-## Next Steps
-1. Complete Anaconda installation
-2. Set up data science environment
-3. Verify all installations
-4. Record video walkthrough
-5. Begin project development
+## Scenario Talking Points (For Video)
+- Activate the intended environment before launching Jupyter.
+- Confirm active interpreter with `python -c "import sys; print(sys.executable)"`.
+- In Jupyter, verify/select the kernel tied to the same Conda environment.
+- If imports fail, install packages in the active environment and restart kernel.
+- Consistent environment + kernel prevents version mismatch and "works in terminal but not notebook" failures.
 
 ## Resources
 - [Anaconda Documentation](https://docs.anaconda.com/)
 - [Python Documentation](https://docs.python.org/3/)
-- [Jupyter Notebook Documentation](https://jupyter.org/documentation)
+- [Jupyter Documentation](https://docs.jupyter.org/)
 
 ---
 *Last Updated: April 8, 2026*
-*Setup Status: COMPLETED*
+*Setup Status: In Progress (Python verified, Conda/Jupyter pending in PowerShell)*
