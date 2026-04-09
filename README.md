@@ -1,86 +1,52 @@
 # RouteIQ - Data Science Project
 
 ## Project Overview
-This repository is used for Data Science sprint work. The current milestone validates that the local development environment is working consistently before project coding begins.
+This repository is used for Data Science sprint milestones. It currently contains environment verification notes and a notebook proving disciplined use of Markdown and Code cells.
 
-## Environment Verification Status
+## Current Milestone Artifact
 
-### Verified in Terminal (Current Session)
-- **Operating System**: Windows 11
-- **Python command**: Working
-- **Python version output**: `Python 3.14.3`
-- **Conda command**: Not currently recognized in PowerShell
-- **Jupyter command**: Not currently recognized in PowerShell
+### Notebook Cell Discipline (Implemented)
+- **Notebook file**: `notebooks/notebook_cell_discipline.ipynb`
+- **Purpose**: Demonstrate clear separation of explanation and execution
+- **Included structure**:
+  - Markdown title/purpose cell
+  - Two Markdown explanation cells
+  - Two Code cells with simple Python commands
+  - Executed outputs saved in notebook
 
-### Evidence Log
+### Why This Matters
+- Markdown cells make notebooks readable for reviewers and collaborators.
+- Code cells stay focused on execution.
+- Clear Markdown-to-Code alignment reduces confusion during handoff and grading.
+
+## How To Validate Notebook Structure
+Use the project verification script to check notebook requirements automatically:
+
 ```powershell
-python --version
-# Output: Python 3.14.3
-
-conda --version
-# Output: conda : The term 'conda' is not recognized ...
-
-jupyter --version
-# Output: jupyter : The term 'jupyter' is not recognized ...
+python verify_setup.py --notebook-only
 ```
 
-## What Must Be Verified For Milestone Completion
-The final PR must include successful proof for all of the following:
-1. `python --version`
-2. `conda --version`
-3. Conda environment activation (`conda activate <env_name>`)
-4. Jupyter launch (`jupyter notebook` or `jupyter lab`)
-5. A Python cell execution inside Jupyter
-
-## Commands To Finish Verification
-Run these in **Anaconda Prompt** first (recommended), then in PowerShell after Conda initialization.
+Validate a custom notebook path:
 
 ```powershell
-conda --version
-conda info --envs
-conda create -n ds_sprint python=3.11 -y
-conda activate ds_sprint
-python --version
-python -c "import sys; print(sys.executable)"
-jupyter notebook
-```
-
-If Jupyter is missing in the environment:
-```powershell
-conda activate ds_sprint
-conda install jupyter -y
-jupyter notebook
-```
-
-## PowerShell Fix (If `conda` Is Not Found)
-Initialize Conda for PowerShell:
-
-```powershell
-conda init powershell
-```
-
-Then close and reopen PowerShell and re-run:
-
-```powershell
-conda --version
-jupyter --version
+python verify_setup.py --notebook notebooks/notebook_cell_discipline.ipynb --notebook-only
 ```
 
 ## Video Walkthrough Checklist (~2 Minutes)
-- Show `python --version`
-- Show `conda --version`
-- Activate the Conda environment
-- Launch Jupyter Notebook or JupyterLab
-- Run one Python cell successfully
-- Open your PR and point to the verification evidence
-- Verbally explain the scenario: terminal Python works but Jupyter uses another interpreter
+- Open `notebooks/notebook_cell_discipline.ipynb`
+- Scroll through the notebook structure
+- Execute one Code cell
+- Render/show one Markdown cell
+- Convert one cell between Code and Markdown
+- Explain when to use Code vs Markdown
+- Explain how separation improves readability and review quality
 
-## Scenario Talking Points (For Video)
-- Activate the intended environment before launching Jupyter.
-- Confirm active interpreter with `python -c "import sys; print(sys.executable)"`.
-- In Jupyter, verify/select the kernel tied to the same Conda environment.
-- If imports fail, install packages in the active environment and restart kernel.
-- Consistent environment + kernel prevents version mismatch and "works in terminal but not notebook" failures.
+## Scenario Talking Points (Mandatory)
+If explanations are written only as code comments and there are no Markdown cells:
+- Readability drops because intent is hidden inside executable blocks
+- Collaboration slows because reviewers must parse code to understand narrative
+- Execution and explanation become tightly mixed, which increases maintenance cost
+- The fix is to move narrative into Markdown sections and keep Code cells execution-only
 
 ## Resources
 - [Anaconda Documentation](https://docs.anaconda.com/)
@@ -88,5 +54,5 @@ jupyter --version
 - [Jupyter Documentation](https://docs.jupyter.org/)
 
 ---
-*Last Updated: April 8, 2026*
-*Setup Status: In Progress (Python verified, Conda/Jupyter pending in PowerShell)*
+*Last Updated: April 9, 2026*
+*Milestone Status: Notebook structure proof added*
