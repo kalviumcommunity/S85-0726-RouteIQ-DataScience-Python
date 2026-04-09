@@ -7,6 +7,8 @@ This script verifies that all components are working correctly.
 import sys
 import subprocess
 import os
+import json
+import argparse
 
 def run_command(command, description):
     """Run a command and return the result."""
@@ -116,6 +118,69 @@ def test_jupyter():
     
     return results
 
+def validate_notebook_structure(notebook_path):
+    """Validate notebook structure for Markdown/Code cell discipline milestone."""
+    print("\n" + "="*60)
+    print("NOTEBOOK STRUCTURE VERIFICATION")
+    print("="*60)
+
+    if not os.path.exists(notebook_path):
+        print(f"FAILED: Notebook not found at {notebook_path}")
+        return {
+            "Notebook Exists": {"success": False, "output": f"Missing file: {notebook_path}"}
+        }
+
+    try:
+        with open(notebook_path, "r", encoding="utf-8") as f:
+            notebook = json.load(f)
+    except Exception as e:
+        print(f"FAILED: Could not read notebook JSON ({e})")
+        return {
+            "Notebook Exists": {"success": True, "output": notebook_path},
+            "Notebook JSON Parse": {"success": False, "output": str(e)}
+        }
+
+    cells = notebook.get("cells", [])
+    markdown_cells = [c for c in cells if c.get("cell_type") == "markdown"]
+    code_cells = [c for c in cells if c.get("cell_type") == "code"]
+    executed_code_cells = [c for c in code_cells if c.get("execution_count") is not None]
+
+    first_is_markdown = bool(cells) and cells[0].get("cell_type") == "markdown"
+    has_markdown_before_each_code = True
+    for idx, cell in enumerate(cells):
+        if cell.get("cell_type") == "code":
+            if idx == 0 or cells[idx - 1].get("cell_type") != "markdown":
+                has_markdown_before_each_code = False
+                break
+
+    results = {
+        "Notebook Exists": {"success": True, "output": notebook_path},
+        "Notebook JSON Parse": {"success": True, "output": "Valid JSON"},
+        "Title Cell Is Markdown": {"success": first_is_markdown, "output": str(first_is_markdown)},
+        "At Least Two Markdown Cells": {
+            "success": len(markdown_cells) >= 2,
+            "output": f"Found {len(markdown_cells)} markdown cells"
+        },
+        "At Least Two Code Cells": {
+            "success": len(code_cells) >= 2,
+            "output": f"Found {len(code_cells)} code cells"
+        },
+        "All Code Cells Executed": {
+            "success": len(executed_code_cells) == len(code_cells) and len(code_cells) > 0,
+            "output": f"Executed {len(executed_code_cells)} of {len(code_cells)} code cells"
+        },
+        "Markdown Precedes Code Cells": {
+            "success": has_markdown_before_each_code,
+            "output": str(has_markdown_before_each_code)
+        }
+    }
+
+    for test_name, result in results.items():
+        status = "PASS" if result["success"] else "FAIL"
+        print(f"[{status}] {test_name}: {result['output']}")
+
+    return results
+
 def generate_report(python_results, anaconda_results, ds_results, jupyter_results):
     """Generate a comprehensive verification report."""
     print("\n" + "="*80)
@@ -156,8 +221,54 @@ def generate_report(python_results, anaconda_results, ds_results, jupyter_result
     
     return passed_tests, total_tests
 
+def generate_notebook_report(notebook_results):
+    """Generate summary report for notebook-only validation."""
+    print("\n" + "="*80)
+    print("NOTEBOOK VERIFICATION REPORT SUMMARY")
+    print("="*80)
+
+    total_tests = 0
+    passed_tests = 0
+
+    for test_name, result in notebook_results.items():
+        status = "PASS" if result["success"] else "FAIL"
+        print(f"  [{status}] {test_name}")
+        total_tests += 1
+        if result["success"]:
+            passed_tests += 1
+
+    print(f"\n{'='*80}")
+    print(f"OVERALL RESULT: {passed_tests}/{total_tests} tests passed")
+    print(f"Success Rate: {(passed_tests/total_tests)*100:.1f}%")
+    if passed_tests == total_tests:
+        print("STATUS: Notebook structure is review-ready.")
+    else:
+        print("STATUS: Notebook structure needs updates.")
+    print("="*80)
+
+    return passed_tests, total_tests
+
 def main():
     """Main verification function."""
+    parser = argparse.ArgumentParser(description="Environment and notebook verification utility.")
+    parser.add_argument(
+        "--notebook",
+        default=os.path.join("notebooks", "notebook_cell_discipline.ipynb"),
+        help="Notebook path for structure verification."
+    )
+    parser.add_argument(
+        "--notebook-only",
+        action="store_true",
+        help="Run only notebook structure checks."
+    )
+    args = parser.parse_args()
+
+    if args.notebook_only:
+        print("Starting notebook structure verification...")
+        notebook_results = validate_notebook_structure(args.notebook)
+        passed, total = generate_notebook_report(notebook_results)
+        return passed, total
+
     print("Starting comprehensive Python and Anaconda setup verification...")
     print("This will test all components of your Data Science environment.")
     
