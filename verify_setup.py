@@ -181,6 +181,95 @@ def validate_notebook_structure(notebook_path):
 
     return results
 
+def validate_kernel_control_notebook(notebook_path):
+    """Validate notebook structure for kernel control milestone."""
+    print("\n" + "="*60)
+    print("KERNEL CONTROL NOTEBOOK VERIFICATION")
+    print("="*60)
+
+    if not os.path.exists(notebook_path):
+        print(f"FAILED: Notebook not found at {notebook_path}")
+        return {
+            "Notebook Exists": {"success": False, "output": f"Missing file: {notebook_path}"}
+        }
+
+    try:
+        with open(notebook_path, "r", encoding="utf-8") as f:
+            notebook = json.load(f)
+    except Exception as e:
+        print(f"FAILED: Could not read notebook JSON ({e})")
+        return {
+            "Notebook Exists": {"success": True, "output": notebook_path},
+            "Notebook JSON Parse": {"success": False, "output": str(e)}
+        }
+
+    cells = notebook.get("cells", [])
+    code_cells = [c for c in cells if c.get("cell_type") == "code"]
+    markdown_cells = [c for c in cells if c.get("cell_type") == "markdown"]
+
+    def cell_source_text(cell):
+        src = cell.get("source", [])
+        if isinstance(src, list):
+            return "".join(src)
+        return str(src)
+
+    has_long_running_candidate = any(
+        "time.sleep(" in cell_source_text(c) or "for i in range(1, 31)" in cell_source_text(c)
+        for c in code_cells
+    )
+    has_interrupt_instruction = any(
+        "Interrupt" in cell_source_text(c) or "interrupt" in cell_source_text(c)
+        for c in markdown_cells
+    )
+    has_restart_instruction = any(
+        "Restart" in cell_source_text(c) or "restart" in cell_source_text(c)
+        for c in markdown_cells
+    )
+    has_state_check = any(
+        "globals()" in cell_source_text(c) or "base_value" in cell_source_text(c)
+        for c in code_cells
+    )
+    executed_count = sum(1 for c in code_cells if c.get("execution_count") is not None)
+
+    results = {
+        "Notebook Exists": {"success": True, "output": notebook_path},
+        "Notebook JSON Parse": {"success": True, "output": "Valid JSON"},
+        "At Least Three Code Cells": {
+            "success": len(code_cells) >= 3,
+            "output": f"Found {len(code_cells)} code cells"
+        },
+        "At Least Three Markdown Cells": {
+            "success": len(markdown_cells) >= 3,
+            "output": f"Found {len(markdown_cells)} markdown cells"
+        },
+        "Long-Running Cell Candidate Present": {
+            "success": has_long_running_candidate,
+            "output": str(has_long_running_candidate)
+        },
+        "Interrupt Guidance Present": {
+            "success": has_interrupt_instruction,
+            "output": str(has_interrupt_instruction)
+        },
+        "Restart Guidance Present": {
+            "success": has_restart_instruction,
+            "output": str(has_restart_instruction)
+        },
+        "Kernel State Check Present": {
+            "success": has_state_check,
+            "output": str(has_state_check)
+        },
+        "At Least Two Cells Executed": {
+            "success": executed_count >= 2,
+            "output": f"Executed {executed_count} code cells"
+        }
+    }
+
+    for test_name, result in results.items():
+        status = "PASS" if result["success"] else "FAIL"
+        print(f"[{status}] {test_name}: {result['output']}")
+
+    return results
+
 def generate_report(python_results, anaconda_results, ds_results, jupyter_results):
     """Generate a comprehensive verification report."""
     print("\n" + "="*80)
@@ -261,11 +350,27 @@ def main():
         action="store_true",
         help="Run only notebook structure checks."
     )
+    parser.add_argument(
+        "--kernel-notebook",
+        default=os.path.join("notebooks", "kernel_control_demo.ipynb"),
+        help="Notebook path for kernel control verification."
+    )
+    parser.add_argument(
+        "--kernel-only",
+        action="store_true",
+        help="Run only kernel control notebook checks."
+    )
     args = parser.parse_args()
 
     if args.notebook_only:
         print("Starting notebook structure verification...")
         notebook_results = validate_notebook_structure(args.notebook)
+        passed, total = generate_notebook_report(notebook_results)
+        return passed, total
+
+    if args.kernel_only:
+        print("Starting kernel control notebook verification...")
+        notebook_results = validate_kernel_control_notebook(args.kernel_notebook)
         passed, total = generate_notebook_report(notebook_results)
         return passed, total
 
