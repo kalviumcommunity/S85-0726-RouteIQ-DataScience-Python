@@ -145,3 +145,13 @@ SETUP_INSTRUCTIONS.md
 verify_setup.py
 MILESTONE_COMPLETE.md
 MILESTONE_STATUS.md
+
+
+# Ignore raw data
+data/raw/*
+!data/raw/.gitkeep
+
+# Ignore outputs
+outputs/*
+!outputs/figures/.gitkeep
+!outputs/models/.gitkeep
