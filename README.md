@@ -91,3 +91,32 @@ If someone gets undefined variable errors when running all cells:
 ---
 *Last Updated: April 9, 2026*
 *Milestone Status: Notebook structure and kernel control proofs added*
+
+
+# Data Science Project Structure
+
+## Folder Explanation
+
+- **data/raw/** → Original data (never modified)
+- **data/processed/** → Cleaned/transformed data
+- **notebooks/** → Jupyter notebooks for analysis
+- **src/** → Python scripts
+- **outputs/figures/** → Graphs & plots
+- **outputs/models/** → Saved ML models
+
+## Why This Structure?
+
+- Keeps project organized
+- Prevents overwriting raw data
+- Makes collaboration easy
+- Improves reproducibility
+
+
+## Project Structure
+
+- data/raw → Original data (unchanged)
+- data/processed → Cleaned data
+- notebooks → Jupyter notebooks for analysis
+- src → Python scripts
+- outputs/figures → Plots and graphs
+- outputs/models → Saved models
