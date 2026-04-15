@@ -71,3 +71,21 @@ If raw, processed, and outputs are mixed together:
 ---
 *Last Updated: April 15, 2026*
 *Milestone Status: Data lifecycle organization proof added*
+
+
+
+
+
+## Python Script
+
+- Script location: src/main.py
+- Purpose: Perform simple data analysis using Python
+- Features:
+  - Calculates sum and average
+  - Prints outputs
+  - Demonstrates basic data handling
+
+## How to Run
+
+```bash
+python src/main.py
