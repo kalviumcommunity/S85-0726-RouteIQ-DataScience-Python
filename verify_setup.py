@@ -270,6 +270,75 @@ def validate_kernel_control_notebook(notebook_path):
 
     return results
 
+def validate_data_lifecycle_structure(raw_dir, processed_dir, outputs_dir):
+    """Validate data lifecycle folder separation and documentation."""
+    print("\n" + "="*60)
+    print("DATA LIFECYCLE STRUCTURE VERIFICATION")
+    print("="*60)
+
+    raw_exists = os.path.isdir(raw_dir)
+    processed_exists = os.path.isdir(processed_dir)
+    outputs_exists = os.path.isdir(outputs_dir)
+
+    raw_readme = os.path.join(raw_dir, "README.md")
+    processed_readme = os.path.join(processed_dir, "README.md")
+    outputs_readme = os.path.join(outputs_dir, "README.md")
+
+    raw_readme_exists = os.path.isfile(raw_readme)
+    processed_readme_exists = os.path.isfile(processed_readme)
+    outputs_readme_exists = os.path.isfile(outputs_readme)
+
+    def read_text(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return f.read()
+        except Exception:
+            return ""
+
+    raw_doc = read_text(raw_readme).lower()
+    processed_doc = read_text(processed_readme).lower()
+    outputs_doc = read_text(outputs_readme).lower()
+
+    raw_immutable_doc = ("do not modify" in raw_doc) or ("read-only" in raw_doc) or ("immutable" in raw_doc)
+    processed_derivation_doc = ("derived from raw" in processed_doc) or ("recreated" in processed_doc)
+    outputs_artifact_doc = ("plots" in outputs_doc) or ("reports" in outputs_doc) or ("models" in outputs_doc)
+
+    raw_files = []
+    processed_files = []
+    output_files = []
+
+    if raw_exists:
+        raw_files = [name for name in os.listdir(raw_dir) if os.path.isfile(os.path.join(raw_dir, name))]
+    if processed_exists:
+        processed_files = [name for name in os.listdir(processed_dir) if os.path.isfile(os.path.join(processed_dir, name))]
+    if outputs_exists:
+        output_files = [name for name in os.listdir(outputs_dir) if os.path.isfile(os.path.join(outputs_dir, name))]
+
+    no_processed_in_raw = not any("processed" in name.lower() for name in raw_files)
+    no_output_in_raw = not any(name.lower().endswith((".png", ".jpg", ".jpeg", ".svg", ".pdf", ".pkl", ".joblib")) for name in raw_files)
+    no_raw_in_outputs = not any("raw" in name.lower() for name in output_files)
+
+    results = {
+        "Raw Folder Exists": {"success": raw_exists, "output": raw_dir},
+        "Processed Folder Exists": {"success": processed_exists, "output": processed_dir},
+        "Outputs Folder Exists": {"success": outputs_exists, "output": outputs_dir},
+        "Raw README Exists": {"success": raw_readme_exists, "output": raw_readme},
+        "Processed README Exists": {"success": processed_readme_exists, "output": processed_readme},
+        "Outputs README Exists": {"success": outputs_readme_exists, "output": outputs_readme},
+        "Raw Immutability Documented": {"success": raw_immutable_doc, "output": str(raw_immutable_doc)},
+        "Processed Derivation Documented": {"success": processed_derivation_doc, "output": str(processed_derivation_doc)},
+        "Outputs Artifact Purpose Documented": {"success": outputs_artifact_doc, "output": str(outputs_artifact_doc)},
+        "No Processed-Named Files In Raw": {"success": no_processed_in_raw, "output": str(no_processed_in_raw)},
+        "No Output Artifact Files In Raw": {"success": no_output_in_raw, "output": str(no_output_in_raw)},
+        "No Raw-Named Files In Outputs": {"success": no_raw_in_outputs, "output": str(no_raw_in_outputs)}
+    }
+
+    for test_name, result in results.items():
+        status = "PASS" if result["success"] else "FAIL"
+        print(f"[{status}] {test_name}: {result['output']}")
+
+    return results
+
 def generate_report(python_results, anaconda_results, ds_results, jupyter_results):
     """Generate a comprehensive verification report."""
     print("\n" + "="*80)
@@ -360,6 +429,26 @@ def main():
         action="store_true",
         help="Run only kernel control notebook checks."
     )
+    parser.add_argument(
+        "--raw-dir",
+        default=os.path.join("data", "raw"),
+        help="Raw data directory path."
+    )
+    parser.add_argument(
+        "--processed-dir",
+        default=os.path.join("data", "processed"),
+        help="Processed data directory path."
+    )
+    parser.add_argument(
+        "--outputs-dir",
+        default="outputs",
+        help="Outputs/artifacts directory path."
+    )
+    parser.add_argument(
+        "--data-only",
+        action="store_true",
+        help="Run only data lifecycle structure checks."
+    )
     args = parser.parse_args()
 
     if args.notebook_only:
@@ -372,6 +461,12 @@ def main():
         print("Starting kernel control notebook verification...")
         notebook_results = validate_kernel_control_notebook(args.kernel_notebook)
         passed, total = generate_notebook_report(notebook_results)
+        return passed, total
+
+    if args.data_only:
+        print("Starting data lifecycle structure verification...")
+        data_results = validate_data_lifecycle_structure(args.raw_dir, args.processed_dir, args.outputs_dir)
+        passed, total = generate_notebook_report(data_results)
         return passed, total
 
     print("Starting comprehensive Python and Anaconda setup verification...")
