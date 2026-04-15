@@ -1,87 +1,67 @@
-# RouteIQ - Data Science Project
+# RouteIQ - Data Science Sprint Repository
 
 ## Project Overview
-This repository is used for Data Science sprint milestones. It currently contains environment verification notes and a notebook proving disciplined use of Markdown and Code cells.
+This repository tracks milestone evidence for Data Science workflow discipline:
+- notebook structure (Markdown vs Code separation)
+- kernel management (interrupt/restart/rerun)
+- data lifecycle organization (raw, processed, outputs)
 
-## Current Milestone Artifacts
+## Current Milestone: Data Lifecycle Organization
 
-### Notebook Cell Discipline (Implemented)
-- **Notebook file**: `notebooks/notebook_cell_discipline.ipynb`
-- **Purpose**: Demonstrate clear separation of explanation and execution
-- **Included structure**:
-  - Markdown title/purpose cell
-  - Two Markdown explanation cells
-  - Two Code cells with simple Python commands
-  - Executed outputs saved in notebook
+### Implemented Folder Structure
+- `data/raw` - original source data only (immutable)
+- `data/processed` - cleaned/transformed data derived from raw
+- `outputs` - artifacts such as plots, reports, and model files
 
-### Why This Matters
-- Markdown cells make notebooks readable for reviewers and collaborators.
-- Code cells stay focused on execution.
-- Clear Markdown-to-Code alignment reduces confusion during handoff and grading.
-
-### Kernel Control and Execution Discipline (Implemented)
-- **Notebook file**: `notebooks/kernel_control_demo.ipynb`
-- **Purpose**: Demonstrate execution order, interrupt behavior, kernel restart, and state rebuild
-- **Included structure**:
-  - Ordered code execution showing kernel state retention
-  - Long-running cell intended for safe interrupt
-  - Restart-and-rerun guidance with state check cell
+### Governance Files Added
+- `data/raw/README.md` - raw data immutability rules
+- `data/processed/README.md` - processed data traceability rules
+- `outputs/README.md` - output artifact storage rules
+- `data/LIFECYCLE_POLICY.md` - one-directional data flow policy
 
 ### Why This Matters
-- Kernel state can hide mistakes when cells run out of order.
-- Interrupt prevents wasting time on unintended long execution.
-- Restart and rerun from top validates notebooks are reproducible for collaborators.
+- Protects raw data from accidental overwrites
+- Preserves traceability from input to derived datasets
+- Prevents contamination by separating outputs from inputs
+- Improves reproducibility and collaboration quality
 
-## How To Validate Notebook Structure
-Use the project verification script to check notebook requirements automatically:
+## Verification Commands
+
+Validate notebook structure milestone:
 
 ```powershell
 python verify_setup.py --notebook-only
 ```
 
-Validate a custom notebook path:
-
-```powershell
-python verify_setup.py --notebook notebooks/notebook_cell_discipline.ipynb --notebook-only
-```
-
-Validate kernel-control notebook expectations:
+Validate kernel control milestone:
 
 ```powershell
 python verify_setup.py --kernel-only
-python verify_setup.py --kernel-notebook notebooks/kernel_control_demo.ipynb --kernel-only
 ```
 
-## Video Walkthrough Checklist (~2 Minutes)
-- Open `notebooks/notebook_cell_discipline.ipynb`
-- Scroll through the notebook structure
-- Execute one Code cell
-- Render/show one Markdown cell
-- Convert one cell between Code and Markdown
-- Explain when to use Code vs Markdown
-- Explain how separation improves readability and review quality
+Validate data lifecycle milestone:
 
-## Kernel Control Video Checklist (~2 Minutes)
-- Open `notebooks/kernel_control_demo.ipynb`
-- Run the first two Code cells and explain retained state
-- Start the long-running cell and interrupt it safely
-- Restart kernel
-- Rerun cells from the top
-- Explain why restart-and-run-all prevents hidden state errors
+```powershell
+python verify_setup.py --data-only
+```
 
-## Scenario Talking Points (Mandatory)
-If explanations are written only as code comments and there are no Markdown cells:
-- Readability drops because intent is hidden inside executable blocks
-- Collaboration slows because reviewers must parse code to understand narrative
-- Execution and explanation become tightly mixed, which increases maintenance cost
-- The fix is to move narrative into Markdown sections and keep Code cells execution-only
+## Data Lifecycle Video Walkthrough Checklist (~2 Minutes)
+- Open `data/raw` and explain why raw data is read-only
+- Open `data/processed` and explain derived/recreatable datasets
+- Open `outputs` and explain artifacts belong here, not in data inputs
+- Briefly open `data/LIFECYCLE_POLICY.md`
+- Explain one-directional flow: raw -> processed -> outputs
 
-## Kernel Scenario Talking Points (Mandatory)
-If someone gets undefined variable errors when running all cells:
-- The notebook was likely authored using hidden kernel state from prior ad hoc runs.
-- Cells may have been executed out of order, so dependencies were not explicit.
-- Restarting clears hidden state and reveals missing setup/order issues.
-- Rerunning all cells from top enforces reproducible execution order.
+## Mandatory Scenario Talking Points
+If raw, processed, and outputs are mixed together:
+- Teams can overwrite raw evidence and lose auditability
+- It becomes unclear which files are inputs vs final results
+- Reproducibility fails because derivation paths are ambiguous
+- Fix by restoring strict folder separation and enforcing flow rules
+
+## Existing Notebook Milestone Artifacts
+- `notebooks/notebook_cell_discipline.ipynb`
+- `notebooks/kernel_control_demo.ipynb`
 
 ## Resources
 - [Anaconda Documentation](https://docs.anaconda.com/)
@@ -89,34 +69,5 @@ If someone gets undefined variable errors when running all cells:
 - [Jupyter Documentation](https://docs.jupyter.org/)
 
 ---
-*Last Updated: April 9, 2026*
-*Milestone Status: Notebook structure and kernel control proofs added*
-
-
-# Data Science Project Structure
-
-## Folder Explanation
-
-- **data/raw/** → Original data (never modified)
-- **data/processed/** → Cleaned/transformed data
-- **notebooks/** → Jupyter notebooks for analysis
-- **src/** → Python scripts
-- **outputs/figures/** → Graphs & plots
-- **outputs/models/** → Saved ML models
-
-## Why This Structure?
-
-- Keeps project organized
-- Prevents overwriting raw data
-- Makes collaboration easy
-- Improves reproducibility
-
-
-## Project Structure
-
-- data/raw → Original data (unchanged)
-- data/processed → Cleaned data
-- notebooks → Jupyter notebooks for analysis
-- src → Python scripts
-- outputs/figures → Plots and graphs
-- outputs/models → Saved models
+*Last Updated: April 15, 2026*
+*Milestone Status: Data lifecycle organization proof added*
