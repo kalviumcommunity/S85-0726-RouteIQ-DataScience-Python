@@ -89,3 +89,17 @@ If raw, processed, and outputs are mixed together:
 
 ```bash
 python src/main.py
+
+
+
+## Conditional Logic
+
+This script demonstrates:
+
+- Basic if statement
+- if-else decision making
+- if-elif-else for multiple conditions
+- Logical operators (and, or, not)
+- String comparisons
+
+These are used to control program flow based on data.

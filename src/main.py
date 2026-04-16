@@ -34,3 +34,55 @@ student = {
 
 avg_marks = sum(student["marks"]) / len(student["marks"])
 print("Student Average Marks:", avg_marks)
+
+
+
+# Conditional Statements Demo
+
+print("---- Basic if ----")
+number = 10
+
+if number > 5:
+    print("Number is greater than 5")
+
+
+print("\n---- if-else ----")
+age = 18
+
+if age >= 18:
+    print("You are eligible to vote")
+else:
+    print("You are not eligible to vote")
+
+
+print("\n---- if-elif-else ----")
+marks = 85
+
+if marks >= 90:
+    print("Grade: A")
+elif marks >= 75:
+    print("Grade: B")
+elif marks >= 50:
+    print("Grade: C")
+else:
+    print("Grade: Fail")
+
+
+print("\n---- Logical Operators ----")
+temperature = 30
+is_sunny = True
+
+if temperature > 25 and is_sunny:
+    print("It's a great day to go outside")
+
+if temperature < 20 or not is_sunny:
+    print("Maybe stay inside or carry a jacket")
+
+
+print("\n---- String Condition ----")
+name = "Nishant"
+
+if name == "Nishant":
+    print("Welcome Nishant!")
+else:
+    print("Unknown user")
