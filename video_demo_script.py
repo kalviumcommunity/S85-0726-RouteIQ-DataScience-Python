@@ -1,125 +1,64 @@
 """
-Video Demonstration Script for Python Data Types
-==============================================
-This is a simplified script perfect for a 2-minute video demonstration.
-It focuses on the most important concepts for the milestone.
-
-Run this script while recording your screen for the video submission.
+Video Demonstration Script for Python Collections
+=================================================
+This script is optimized for a 2-minute screen recording.
 """
 
-print("🎬 PYTHON DATA TYPES - VIDEO DEMONSTRATION")
+print("PYTHON COLLECTIONS - VIDEO DEMONSTRATION")
 print("=" * 50)
 
-# === NUMERIC DATA TYPES ===
-print("\n📊 NUMERIC DATA TYPES")
-print("-" * 25)
+# === LISTS ===
+print("\n1) LIST EXAMPLE")
+print("-" * 15)
 
-# Integer examples
-age = 25
-temperature = -5
-count = 0
+fruits = ["apple", "banana", "mango"]
+print(f"Original list: {fruits}")
+print(f"First item: {fruits[0]}")
 
-print(f"Integer examples:")
-print(f"  Age: {age} (type: {type(age).__name__})")
-print(f"  Temperature: {temperature} (type: {type(temperature).__name__})")
-print(f"  Count: {count} (type: {type(count).__name__})")
+fruits[1] = "orange"
+fruits.append("grapes")
+removed_item = fruits.pop(0)
 
-# Float examples
-price = 19.99
-pi = 3.14159
-average = 87.5
+print(f"After modify/add/remove: {fruits}")
+print(f"Removed item: {removed_item}")
 
-print(f"\nFloat examples:")
-print(f"  Price: ${price} (type: {type(price).__name__})")
-print(f"  Pi: {pi} (type: {type(pi).__name__})")
-print(f"  Average: {average}% (type: {type(average).__name__})")
+# === TUPLES ===
+print("\n2) TUPLE EXAMPLE")
+print("-" * 16)
 
-# Basic arithmetic
-print(f"\nBasic arithmetic:")
-print(f"  10 + 5 = {10 + 5}")
-print(f"  10 / 3 = {10 / 3} (always returns float)")
-print(f"  10 // 3 = {10 // 3} (integer division)")
+weekdays = ("Mon", "Tue", "Wed")
+print(f"Tuple: {weekdays}")
+print(f"First day: {weekdays[0]}")
 
-# === STRING DATA TYPES ===
-print("\n📝 STRING DATA TYPES")
-print("-" * 25)
+try:
+    weekdays[0] = "Sunday"
+except TypeError as error:
+    print(f"Immutability behavior: {error}")
 
-# String creation
-name = "Alice"
-message = 'Hello, Python!'
-multi_line = """Line 1
-Line 2"""
+# === DICTIONARIES ===
+print("\n3) DICTIONARY EXAMPLE")
+print("-" * 21)
 
-print(f"String examples:")
-print(f"  Name: {name} (type: {type(name).__name__})")
-print(f"  Message: {message} (type: {type(message).__name__})")
-print(f"  Length of name: {len(name)} characters")
+employee = {"name": "Ravi", "role": "Analyst", "id": 101}
+print(f"Original dictionary: {employee}")
+print(f"Access by key name: {employee['name']}")
 
-# String operations
-first_name = "John"
-last_name = "Doe"
-full_name = first_name + " " + last_name
+employee["role"] = "Senior Analyst"
+employee["location"] = "Remote"
 
-print(f"\nString operations:")
-print(f"  First name: {first_name}")
-print(f"  Last name: {last_name}")
-print(f"  Combined: {full_name}")
-print(f"  Uppercase: {full_name.upper()}")
+print(f"After update/add: {employee}")
 
-# === TYPE MIXING AND CONVERSION ===
-print("\n🔄 TYPE MIXING & CONVERSION")
-print("-" * 30)
+# === DIFFERENCES AND USE CASES ===
+print("\n4) DIFFERENCES + USE CASES")
+print("-" * 27)
+print("List: mutable, best for dynamic ordered items.")
+print("Tuple: immutable, best for fixed values.")
+print("Dictionary: key-value mapping, best for entity data.")
 
-# Common issue: mixing types
-number = 42
-text = "The answer is "
+print("\nVideo checklist:")
+print("- Show list indexing and updates.")
+print("- Show tuple indexing and immutability error.")
+print("- Show dictionary key access and updates.")
+print("- Explain when each structure is preferred.")
 
-print(f"Type mixing:")
-print(f"  Number: {number} (type: {type(number).__name__})")
-print(f"  Text: '{text}' (type: {type(text).__name__})")
-
-# Correct ways to combine
-method1 = text + str(number)  # Convert to string
-method2 = f"The answer is {number}"  # f-string (recommended)
-
-print(f"  Method 1 (str()): {method1}")
-print(f"  Method 2 (f-string): {method2}")
-
-# String to number conversion
-age_string = "25"
-price_string = "19.99"
-
-print(f"\nString to number conversion:")
-print(f"  '{age_string}' → {int(age_string)} (integer)")
-print(f"  '{price_string}' → {float(price_string)} (float)")
-
-# === TYPE INSPECTION ===
-print("\n🔍 TYPE INSPECTION")
-print("-" * 20)
-
-# Check types of different variables
-variables = [42, 3.14, "hello", True, None]
-
-print(f"Checking types:")
-for var in variables:
-    var_type = type(var).__name__
-    print(f"  {var} → {var_type}")
-
-# Using isinstance for type checking
-value = 42
-print(f"\nType checking with isinstance():")
-print(f"  Is {value} an integer? {isinstance(value, int)}")
-print(f"  Is {value} a string? {isinstance(value, str)}")
-print(f"  Is {value} a number? {isinstance(value, (int, float))}")
-
-# === KEY TAKEAWAYS ===
-print("\n🎯 KEY TAKEAWAYS")
-print("-" * 20)
-print("1. Numbers: int (whole) and float (decimal)")
-print("2. Strings: text data, use quotes")
-print("3. Convert types explicitly with str(), int(), float()")
-print("4. Use f-strings for clean formatting")
-print("5. Check types with type() and isinstance()")
-print("6. Always be aware of your data types!")
-
-print(f"\n✅ Demo complete! Ready for video recording.")
+print("\nDemo complete.")
