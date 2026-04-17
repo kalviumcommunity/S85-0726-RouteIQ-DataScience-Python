@@ -128,3 +128,19 @@ This script demonstrates:
 - String comparisons
 
 These are used to control program flow based on data.
+
+
+
+
+
+
+## Code Readability (PEP 8)
+
+This script demonstrates:
+
+- Use of descriptive variable names (snake_case)
+- Avoiding unclear names like x, a, s
+- Writing meaningful comments explaining intent
+- Clean and readable Python code
+
+Readable code improves collaboration and debugging.

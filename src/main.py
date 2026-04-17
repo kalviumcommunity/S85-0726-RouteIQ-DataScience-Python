@@ -86,3 +86,51 @@ if name == "Nishant":
     print("Welcome Nishant!")
 else:
     print("Unknown user")
+    
+    
+    
+    
+    # Demonstrating readable variable names and meaningful comments (PEP 8)
+
+# ❌ Poor variable naming (example - do not use in real code)
+x = [10, 20, 30]
+s = sum(x)
+a = s / len(x)
+
+print("Bad Example Output:", a)
+
+
+# ✅ Good variable naming (PEP 8 style)
+numbers_list = [10, 20, 30]
+
+# Calculate total sum of numbers
+total_sum = sum(numbers_list)
+
+# Calculate average value of numbers
+average_value = total_sum / len(numbers_list)
+
+print("\nGood Example Output:")
+print("Numbers:", numbers_list)
+print("Total:", total_sum)
+print("Average:", average_value)
+
+
+# ✅ Using meaningful variable names for clarity
+student_name = "Nishant"
+student_marks = [80, 85, 90]
+
+# Compute average marks to evaluate performance
+average_marks = sum(student_marks) / len(student_marks)
+
+# Decide grade based on average marks
+if average_marks >= 85:
+    grade = "A"
+elif average_marks >= 70:
+    grade = "B"
+else:
+    grade = "C"
+
+print("\nStudent Report:")
+print("Name:", student_name)
+print("Average Marks:", average_marks)
+print("Grade:", grade)
