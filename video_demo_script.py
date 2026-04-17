@@ -1,64 +1,90 @@
 """
-Video Demonstration Script for Python Collections
-=================================================
+Video Demonstration Script for Function Parameters and Return Values
+=====================================================================
 This script is optimized for a 2-minute screen recording.
 """
 
-print("PYTHON COLLECTIONS - VIDEO DEMONSTRATION")
-print("=" * 50)
+print("FUNCTION PARAMETERS AND RETURN VALUES - VIDEO DEMO")
+print("=" * 55)
 
-# === LISTS ===
-print("\n1) LIST EXAMPLE")
-print("-" * 15)
+# === 1. FUNCTION WITH PARAMETERS ===
+print("\n1) FUNCTION WITH PARAMETERS")
+print("-" * 30)
 
-fruits = ["apple", "banana", "mango"]
-print(f"Original list: {fruits}")
-print(f"First item: {fruits[0]}")
+def greet_person(name, age):
+    """Accept parameters and return a greeting."""
+    return f"Hello {name}, you are {age} years old!"
 
-fruits[1] = "orange"
-fruits.append("grapes")
-removed_item = fruits.pop(0)
+# Call function with arguments
+result = greet_person("Alice", 25)
+print(f"Function call: greet_person('Alice', 25)")
+print(f"Returned: {result}")
 
-print(f"After modify/add/remove: {fruits}")
-print(f"Removed item: {removed_item}")
+# === 2. CALCULATION FUNCTION ===
+print("\n2) CALCULATION FUNCTION")
+print("-" * 28)
 
-# === TUPLES ===
-print("\n2) TUPLE EXAMPLE")
-print("-" * 16)
+def calculate_area(length, width):
+    """Calculate area and return result."""
+    return length * width
 
-weekdays = ("Mon", "Tue", "Wed")
-print(f"Tuple: {weekdays}")
-print(f"First day: {weekdays[0]}")
+# Use returned value for further computation
+area = calculate_area(10, 5)
+cost = area * 50
+print(f"Area: calculate_area(10, 5) = {area}")
+print(f"Cost calculation: {area} * 50 = ${cost}")
 
-try:
-    weekdays[0] = "Sunday"
-except TypeError as error:
-    print(f"Immutability behavior: {error}")
+# === 3. MULTIPLE RETURN VALUES ===
+print("\n3) MULTIPLE RETURN VALUES")
+print("-" * 30)
 
-# === DICTIONARIES ===
-print("\n3) DICTIONARY EXAMPLE")
-print("-" * 21)
+def get_stats(numbers):
+    """Return multiple statistics."""
+    total = sum(numbers)
+    average = total / len(numbers)
+    return total, average
 
-employee = {"name": "Ravi", "role": "Analyst", "id": 101}
-print(f"Original dictionary: {employee}")
-print(f"Access by key name: {employee['name']}")
+# Store multiple returned values
+numbers = [10, 20, 30, 40]
+total, average = get_stats(numbers)
+print(f"Stats for {numbers}:")
+print(f"Total: {total}, Average: {average}")
 
-employee["role"] = "Senior Analyst"
-employee["location"] = "Remote"
+# === 4. FUNCTION CHAINING ===
+print("\n4) FUNCTION CHAINING")
+print("-" * 24)
 
-print(f"After update/add: {employee}")
+def add_five(n):
+    return n + 5
 
-# === DIFFERENCES AND USE CASES ===
-print("\n4) DIFFERENCES + USE CASES")
-print("-" * 27)
-print("List: mutable, best for dynamic ordered items.")
-print("Tuple: immutable, best for fixed values.")
-print("Dictionary: key-value mapping, best for entity data.")
+def multiply_by_two(n):
+    return n * 2
+
+# Chain functions together
+result = multiply_by_two(add_five(3))
+print(f"Chaining: multiply_by_two(add_five(3)) = {result}")
+print(f"Step 1: add_five(3) = {add_five(3)}")
+print(f"Step 2: multiply_by_two({add_five(3)}) = {result}")
+
+# === 5. BEST PRACTICES ===
+print("\n5) BEST PRACTICES")
+print("-" * 18)
+
+# GOOD: Accept parameters, return value
+def calculate_discount(price, percentage):
+    """Good example - accepts parameters and returns value."""
+    return price * (percentage / 100)
+
+# Use the returned value
+discount = calculate_discount(100, 10)
+final_price = 100 - discount
+print(f"Discount: ${discount}, Final price: ${final_price}")
 
 print("\nVideo checklist:")
-print("- Show list indexing and updates.")
-print("- Show tuple indexing and immutability error.")
-print("- Show dictionary key access and updates.")
-print("- Explain when each structure is preferred.")
+print("- Show function definition with parameters")
+print("- Demonstrate calling function with arguments")
+print("- Show return statement and returned value")
+print("- Use returned value in further calculation")
+print("- Explain function chaining concept")
 
-print("\nDemo complete.")
+print("\nDemo complete!")
