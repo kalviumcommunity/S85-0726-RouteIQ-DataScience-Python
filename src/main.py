@@ -134,3 +134,49 @@ print("\nStudent Report:")
 print("Name:", student_name)
 print("Average Marks:", average_marks)
 print("Grade:", grade)
+
+
+
+# NumPy Basics: Element-wise operations and scalar operations
+
+import numpy as np
+
+print("---- Create NumPy Arrays ----")
+array_a = np.array([10, 20, 30])
+array_b = np.array([1, 2, 3])
+
+print("Array A:", array_a)
+print("Array B:", array_b)
+
+
+print("\n---- Element-wise Operations ----")
+addition_result = array_a + array_b
+subtraction_result = array_a - array_b
+multiplication_result = array_a * array_b
+division_result = array_a / array_b
+
+print("Addition:", addition_result)
+print("Subtraction:", subtraction_result)
+print("Multiplication:", multiplication_result)
+print("Division:", division_result)
+
+
+print("\n---- Scalar Operations ----")
+add_scalar = array_a + 5          # add 5 to each element
+multiply_scalar = array_a * 2     # multiply each element by 2
+
+print("Array A + 5:", add_scalar)
+print("Array A * 2:", multiply_scalar)
+
+
+print("\n---- Python List vs NumPy Array ----")
+list_a = [10, 20, 30]
+list_b = [1, 2, 3]
+
+print("List addition (concatenation):", list_a + list_b)
+print("NumPy addition (element-wise):", array_a + array_b)
+
+
+print("\n---- Shape Check (avoid mistakes) ----")
+print("Shape of array_a:", array_a.shape)
+print("Shape of array_b:", array_b.shape)
