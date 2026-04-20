@@ -144,3 +144,17 @@ This script demonstrates:
 - Clean and readable Python code
 
 Readable code improves collaboration and debugging.
+
+
+
+## NumPy Array Operations
+
+This script demonstrates:
+
+- Creating NumPy arrays
+- Element-wise operations (addition, subtraction, multiplication, division)
+- Scalar operations on arrays
+- Difference between Python lists and NumPy arrays
+- Basic shape checking
+
+NumPy allows efficient, readable numerical computation without loops.
