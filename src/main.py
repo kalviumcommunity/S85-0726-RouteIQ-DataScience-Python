@@ -180,3 +180,30 @@ print("NumPy addition (element-wise):", array_a + array_b)
 print("\n---- Shape Check (avoid mistakes) ----")
 print("Shape of array_a:", array_a.shape)
 print("Shape of array_b:", array_b.shape)
+
+
+
+import pandas as pd
+
+# Example list
+data_list = [10, 20, 30, 40]
+
+# Create Series
+series_from_list = pd.Series(data_list)
+
+print(series_from_list)
+
+
+import numpy as np
+
+# Example NumPy array
+data_array = np.array([5, 15, 25, 35])
+
+# Create Series
+series_from_array = pd.Series(data_array)
+
+print(series_from_array)
+
+
+print(series_from_list.values)   # Shows raw values
+print(series_from_list.index)    # Shows index labels
