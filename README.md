@@ -158,3 +158,18 @@ This script demonstrates:
 - Basic shape checking
 
 NumPy allows efficient, readable numerical computation without loops.
+
+
+
+
+## CSV Loading with Pandas
+
+This script demonstrates:
+
+- Loading a CSV file using pandas
+- Previewing data using head()
+- Checking column names
+- Verifying shape (rows, columns)
+- Inspecting data using info()
+
+This ensures correct data loading before analysis.

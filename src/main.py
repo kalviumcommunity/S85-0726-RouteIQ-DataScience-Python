@@ -207,3 +207,28 @@ print(series_from_array)
 
 print(series_from_list.values)   # Shows raw values
 print(series_from_list.index)    # Shows index labels
+# Loading CSV using pandas and inspecting data
+
+import pandas as pd
+
+# Load CSV file
+file_path = "data/raw/sample_data.csv"
+dataframe = pd.read_csv(file_path)
+
+print("---- Data Loaded Successfully ----")
+
+# Preview first 5 rows
+print("\nFirst 5 rows:")
+print(dataframe.head())
+
+# Show column names
+print("\nColumns:")
+print(dataframe.columns)
+
+# Show shape (rows, columns)
+print("\nShape (rows, columns):")
+print(dataframe.shape)
+
+# Basic info
+print("\nData Info:")
+print(dataframe.info())
