@@ -173,3 +173,19 @@ This script demonstrates:
 - Inspecting data using info()
 
 This ensures correct data loading before analysis.
+
+
+
+
+
+## Data Shape and Data Types
+
+This script demonstrates:
+
+- Checking DataFrame shape using df.shape
+- Understanding rows (observations) and columns (features)
+- Inspecting column data types using df.dtypes
+- Using df.info() for detailed structure
+- Understanding why correct data types are important
+
+This step ensures data is correctly interpreted before analysis.
