@@ -1,71 +1,69 @@
-# Milestone 4.10 Status Report
+# Milestone 4.35 Status Report
 
-## Markdown Documentation for Jupyter Notebooks - Current Status
+## Identifying and Removing Duplicate Records - Current Status
 
-### Completed Tasks: 5/5
+### Completed Tasks: 4/4
 
-#### 1. Review Existing Notebooks - COMPLETED
-- Analyzed current notebook structure and documentation
-- Identified areas for improvement in Markdown usage
-- Assessed existing cell organization and flow
+#### 1. Understanding Duplicate Records - COMPLETED
+- Created sample DataFrame with intentional duplicates
+- Demonstrated row-level duplication concepts
+- Showed exact vs partial duplicates
+- Built awareness of data quality issues
 
-#### 2. Create Comprehensive Markdown Demo - COMPLETED
-- Created `markdown_mastery_demo.ipynb` with extensive examples
-- Covered all required topics: headings, lists, code formatting
-- Demonstrated professional documentation practices
-- Included advanced features: tables, emphasis, links
+#### 2. Detecting Duplicate Rows - COMPLETED
+- Used `duplicated()` method to identify duplicates
+- Counted duplicate rows in dataset
+- Inspected duplicate entries with boolean masking
+- Understood boolean duplicate indicators
 
-#### 3. Improve Existing Notebooks - COMPLETED
-- Enhanced `kernel_control_demo.ipynb` with better explanations
-- Improved `notebook_cell_discipline.ipynb` documentation
-- Added clear intent explanations and result interpretations
-- Applied explain-execute-interpret pattern consistently
+#### 3. Removing Duplicate Records - COMPLETED
+- Applied `drop_duplicates()` method safely
+- Demonstrated keeping first occurrence by default
+- Showed effect on dataset size
+- Explained intentional deduplication
 
-#### 4. Clean Up Project Structure - COMPLETED
-- Removed unnecessary `GIT_RECOVERY.md` file
-- Maintained clean folder structure
-- Organized notebooks in dedicated `/notebooks` directory
-- Preserved essential project files
-
-#### 5. Documentation Standards - COMPLETED
-- Established clear Markdown documentation patterns
-- Created reusable templates for notebook structure
-- Documented best practices for cell organization
-- Provided comprehensive examples for future reference
+#### 4. Verifying Deduplication Results - COMPLETED
+- Compared dataset shape before and after
+- Rechecked for remaining duplicates
+- Confirmed important records retained
+- Documented changes clearly
 
 ## Summary
 
 ### What's Accomplished:
-- **Complete Markdown mastery demonstration** with practical examples
-- **Professional notebook structure** following best practices
-- **Enhanced existing notebooks** with proper documentation
-- **Clean project organization** with maintained folder structure
-- **Reusable documentation patterns** for future notebooks
+- **Complete duplicate handling demonstration** with practical examples
+- **Professional data cleaning workflow** following best practices
+- **Clear detection and removal process** with verification
+- **Comprehensive demo script** ready for video recording
+- **Key takeaways documented** for future reference
 
 ### Key Deliverables:
-1. **`markdown_mastery_demo.ipynb`** - Comprehensive demonstration notebook
-2. **Enhanced existing notebooks** with improved documentation
-3. **Clean project structure** with organized notebooks folder
-4. **Documentation standards** for consistent future work
+1. **`duplicate_handling_demo.py`** - Comprehensive demonstration script
+2. **Tested and verified output** showing all duplicate handling steps
+3. **Clear explanations** of each method and its purpose
+4. **Updated milestone status** documentation
 
 ## Current Status: COMPLETED
-Milestone 4.10 is **fully complete**. All objectives have been achieved:
+Milestone 4.35 is **fully complete**. All objectives have been achieved:
 
-✅ **Headings**: Logical hierarchy and structure demonstrated  
-✅ **Lists**: Ordered, unordered, and nested examples provided  
-✅ **Code formatting**: Inline code and fenced blocks mastered  
-✅ **Markdown-Code alternation**: Professional patterns established  
-✅ **Project cleanup**: Unnecessary files removed, structure maintained  
+✅ **Duplicate detection**: `duplicated()` method demonstrated  
+✅ **Duplicate inspection**: Boolean mask and duplicate rows shown  
+✅ **Duplicate removal**: `drop_duplicates()` method applied  
+✅ **Verification**: Shape comparison and recheck performed  
+✅ **Documentation**: Clear explanations and key takeaways provided  
 
 ### Ready for Submission:
-- All notebooks demonstrate professional Markdown usage
-- Documentation follows established best practices
-- Project structure is clean and organized
-- Examples are comprehensive and practical
+- Demo script demonstrates all required duplicate handling concepts
+- Output shows clear before/after comparison
+- Script is optimized for 2-minute video recording
+- All methods are explained with practical examples
 
 **Video Walkthrough Note**: A 2-minute screen recording should demonstrate:
-- Creating Markdown cells
-- Writing headings and lists
-- Adding code formatting
-- Switching between cell types
-- Explaining documentation importance
+- Running the duplicate_handling_demo.py script
+- Explaining the original DataFrame with duplicates
+- Showing duplicate detection with duplicated()
+- Inspecting the duplicate rows
+- Removing duplicates with drop_duplicates()
+- Comparing shape before and after
+- Verifying no duplicates remain
+- Explaining why deduplication matters for data quality
