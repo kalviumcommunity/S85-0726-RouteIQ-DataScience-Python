@@ -189,3 +189,22 @@ This script demonstrates:
 - Understanding why correct data types are important
 
 This step ensures data is correctly interpreted before analysis.
+
+
+## 📊 Histogram Visualization Assignment
+
+### ✅ What I Did
+- Loaded dataset using Pandas
+- Created histogram for a numeric column
+- Visualized multiple columns using histograms
+
+### 📈 Key Learnings
+- Understood bins and frequency
+- Interpreted distribution shape (skewness)
+- Identified spread and possible outliers
+
+### 🎥 Video Walkthrough
+(Add your video link here)
+
+### 🚀 Outcome
+This assignment helped me understand how to visually analyze data distributions using histograms.
