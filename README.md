@@ -1,210 +1,51 @@
-# RouteIQ - Data Science Sprint Repository
+# RouteIQ: Urban Delivery Route Optimization
 
-## Project Overview
-This repository tracks milestone evidence for Data Science workflow discipline:
-- notebook structure (Markdown vs Code separation)
-- kernel management (interrupt/restart/rerun)
-- data lifecycle organization (raw, processed, outputs)
+## Problem Statement
+Delivery startups struggle to optimise routes in dense urban areas where traffic patterns vary widely by time and locality. This project explores how historical data can reveal the most efficient delivery pathways and the factors that influence delivery times.
 
-## Current Milestone: Data Lifecycle Organization
+## Approach
+This project follows the Data Science lifecycle (Question → Data → Insight) utilizing Python, NumPy, pandas, matplotlib, and seaborn:
+1.  **Data Generation**: A synthetic dataset (`delivery_trips.csv`) was generated to simulate realistic urban delivery scenarios.
+2.  **Data Setup & Inspection**: Data structures and arrays were handled using basic Python and NumPy operations (vectorization and broadcasting).
+3.  **Data Cleaning**: Handled missing values, removed duplicates, and standardized string formats.
+4.  **Exploratory Data Analysis (EDA)**: Analyzed distributions, correlations, and outliers using boxplots, histograms, scatter plots, and line plots.
+5.  **Insight Generation**: Summarized key findings to answer the initial business question.
 
-### Implemented Folder Structure
-- `data/raw` - original source data only (immutable)
-- `data/processed` - cleaned/transformed data derived from raw
-- `outputs` - artifacts such as plots, reports, and model files
+## Key Insights
+*   **High Delay Areas and Times**: Distinct peaks in delivery duration occur during morning (8-10 AM) and evening (5-7 PM) rush hours. The `old_city` pickup area exhibits consistently higher base durations due to difficult navigation.
+*   **Impact of Weather and Traffic**: There is a clear linear relationship between distance and duration, but higher traffic indices and adverse weather (rain/fog) add significant penalty multipliers, shifting delivery times upward.
+*   **Outlier Influence**: Extreme anomalies in actual delivery durations (> 3 standard deviations) were detected, likely representing edge cases like accidents or vehicle breakdowns.
 
-### Governance Files Added
-- `data/raw/README.md` - raw data immutability rules
-- `data/processed/README.md` - processed data traceability rules
-- `outputs/README.md` - output artifact storage rules
-- `data/LIFECYCLE_POLICY.md` - one-directional data flow policy
+## Assumptions & Limitations
+*   **Synthetic Data**: The dataset is entirely synthetic, generated using a fixed random seed.
+*   **Linear/Static Assumptions**: Traffic and weather effects were modeled as static penalty multipliers. Real-world traffic is more dynamic and non-linear.
+*   **No Machine Learning**: Only basic Exploratory Data Analysis and data manipulation techniques from Sprint #3 were used. Predictive modeling or advanced routing algorithms were not implemented.
+*   **Uniform Distribution**: Areas and vehicle types were assigned randomly with static probabilities, which might not reflect true urban geographic distributions.
 
-### Why This Matters
-- Protects raw data from accidental overwrites
-- Preserves traceability from input to derived datasets
-- Prevents contamination by separating outputs from inputs
-- Improves reproducibility and collaboration quality
+## How to Run the Project
+1.  Ensure you have a Python environment with `numpy`, `pandas`, `matplotlib`, and `seaborn` installed.
+2.  **Generate Data**: Run the data generation script from the project root to create the `delivery_trips.csv` dataset:
+    ```bash
+    python src/data_generator.py
+    ```
+3.  **Run Analysis**: Open the Jupyter Notebook to view the analysis:
+    ```bash
+    jupyter notebook notebooks/RouteIQ_analysis.ipynb
+    ```
+    You can execute the notebook end-to-end via `Kernel` → `Restart & Run All`.
 
-## Verification Commands
-
-Validate notebook structure milestone:
-
-```powershell
-python verify_setup.py --notebook-only
+## Folder Structure
+```text
+RouteIQ/
+├── data/
+│   ├── raw/                  # Contains the generated synthetic dataset
+│   └── processed/            # For cleaned datasets (if saved)
+├── notebooks/
+│   └── RouteIQ_analysis.ipynb # Single complete analysis notebook
+├── src/
+│   └── data_generator.py     # Script that creates the synthetic data
+├── outputs/
+│   └── figures/              # Directory for saved plots
+├── README.md                 # Project documentation
+└── .gitignore                # Git ignore rules
 ```
-
-Validate kernel control milestone:
-
-```powershell
-python verify_setup.py --kernel-only
-```
-
-Validate data lifecycle milestone:
-
-```powershell
-python verify_setup.py --data-only
-```
-
-## Data Lifecycle Video Walkthrough Checklist (~2 Minutes)
-- Open `data/raw` and explain why raw data is read-only
-- Open `data/processed` and explain derived/recreatable datasets
-- Open `outputs` and explain artifacts belong here, not in data inputs
-- Briefly open `data/LIFECYCLE_POLICY.md`
-- Explain one-directional flow: raw -> processed -> outputs
-
-## Mandatory Scenario Talking Points
-If raw, processed, and outputs are mixed together:
-- Teams can overwrite raw evidence and lose auditability
-- It becomes unclear which files are inputs vs final results
-- Reproducibility fails because derivation paths are ambiguous
-- Fix by restoring strict folder separation and enforcing flow rules
-
-## Existing Notebook Milestone Artifacts
-- `notebooks/notebook_cell_discipline.ipynb`
-- `notebooks/kernel_control_demo.ipynb`
-
-## Resources
-- [Anaconda Documentation](https://docs.anaconda.com/)
-- [Python Documentation](https://docs.python.org/3/)
-- [Jupyter Documentation](https://docs.jupyter.org/)
-
----
-*Last Updated: April 15, 2026*
-*Milestone Status: Data lifecycle organization proof added*
-
-## Current Milestone: Python Collections Fundamentals
-
-### Files Created for This Milestone
-- `data_types_fundamentals.py` - Comprehensive demonstration of lists, tuples, and dictionaries
-- `video_demo_script.py` - Simplified collections script optimized for 2-minute video recording
-
-### Key Concepts Demonstrated
-- **Lists**: Ordered mutable collections, indexing, updating, append/pop
-- **Tuples**: Ordered immutable collections, indexing, immutability behavior
-- **Dictionaries**: Key-value storage, access by key, update/add/remove pairs
-- **Mutability vs Immutability**: Understanding which structures can change
-- **Structure Selection**: Choosing list/tuple/dictionary based on use case
-
-### Video Recording Instructions
-1. Open `video_demo_script.py` in your code editor
-2. Start screen recording software
-3. Run: `python video_demo_script.py`
-4. Explain each section as it appears (lists, tuples, dictionaries, and use cases)
-5. Highlight key takeaways at the end
-
-### Running the Scripts
-```bash
-# Comprehensive collections demonstration
-python data_types_fundamentals.py
-
-# Video collections demonstration (recommended for recording)
-python video_demo_script.py
-```
-
-## Python Script
-
-- Script location: src/main.py
-- Purpose: Perform simple data analysis using Python
-- Features:
-  - Calculates sum and average
-  - Prints outputs
-  - Demonstrates basic data handling
-
-## How to Run
-
-```bash
-python src/main.py
-
-
-
-## Conditional Logic
-
-This script demonstrates:
-
-- Basic if statement
-- if-else decision making
-- if-elif-else for multiple conditions
-- Logical operators (and, or, not)
-- String comparisons
-
-These are used to control program flow based on data.
-
-
-
-
-
-
-## Code Readability (PEP 8)
-
-This script demonstrates:
-
-- Use of descriptive variable names (snake_case)
-- Avoiding unclear names like x, a, s
-- Writing meaningful comments explaining intent
-- Clean and readable Python code
-
-Readable code improves collaboration and debugging.
-
-
-
-## NumPy Array Operations
-
-This script demonstrates:
-
-- Creating NumPy arrays
-- Element-wise operations (addition, subtraction, multiplication, division)
-- Scalar operations on arrays
-- Difference between Python lists and NumPy arrays
-- Basic shape checking
-
-NumPy allows efficient, readable numerical computation without loops.
-
-
-
-
-## CSV Loading with Pandas
-
-This script demonstrates:
-
-- Loading a CSV file using pandas
-- Previewing data using head()
-- Checking column names
-- Verifying shape (rows, columns)
-- Inspecting data using info()
-
-This ensures correct data loading before analysis.
-
-
-
-
-
-## Data Shape and Data Types
-
-This script demonstrates:
-
-- Checking DataFrame shape using df.shape
-- Understanding rows (observations) and columns (features)
-- Inspecting column data types using df.dtypes
-- Using df.info() for detailed structure
-- Understanding why correct data types are important
-
-This step ensures data is correctly interpreted before analysis.
-
-
-## 📊 Histogram Visualization Assignment
-
-### ✅ What I Did
-- Loaded dataset using Pandas
-- Created histogram for a numeric column
-- Visualized multiple columns using histograms
-
-### 📈 Key Learnings
-- Understood bins and frequency
-- Interpreted distribution shape (skewness)
-- Identified spread and possible outliers
-
-### 🎥 Video Walkthrough
-(Add your video link here)
-
-### 🚀 Outcome
-This assignment helped me understand how to visually analyze data distributions using histograms.
